@@ -1,6 +1,6 @@
-# from flask import Flask
-# from flaskext.mysql import MySQL
-# from flask import jsonify
+from flask import Flask
+from flaskext.mysql import MySQL
+from flask import jsonify
 from flask import render_template
 from flask import request, redirect, url_for
 
@@ -49,9 +49,9 @@ def delete(book_id):
 def update(book_id):
     if request.method == "POST":
         name = request.form['name']
-        console = request.form['console']
+        author = request.form['author']
         year = request.form['year']
-        cursor.execute("UPDATE books SET name = '{}', year = '{}', console='{}' WHERE id = '{}'".format(name, int(year), console, book_id))
+        cursor.execute("UPDATE books SET name = '{}', year = '{}', author='{}' WHERE id = '{}'".format(name, int(year), author, book_id))
         conn.commit()
         return redirect(url_for('index'))
     cursor.execute('SELECT * FROM books WHERE id = %d' % book_id)
@@ -63,9 +63,9 @@ def update(book_id):
 def create():
     if request.method == 'POST':
         name = request.form['name']
-        console = request.form['console']
+        author = request.form['author']
         year = request.form['year']
-        cursor.execute("INSERT INTO books (name, year, console) VALUES ('{}','{}','{}')".format(name, int(year), console))
+        cursor.execute("INSERT INTO books (name, year, author) VALUES ('{}','{}','{}')".format(name, int(year), author))
         conn.commit()
         return redirect(url_for('index'))
     return render_template('bookForm.html')

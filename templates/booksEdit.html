@@ -1,23 +1,22 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-</head>
-<script src="../../public/script.js"></script>
-<h1><?php echo $title; ?></h1>
-<form id='booksEdit' data_id = "<?php echo $book['id']; ?>">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input name="name" type="text" class="form-control" id="name" placeholder="<?php echo ($books['name']); ?>">
-  </div>
-  <div class="form-group">
-    <label for="author">Author</label>
-    <input name="author" type="text" class="form-control" id="author" placeholder="<?php echo ($books['author']); ?>">
-  </div>
-  <div class="form-group">
-    <label for="year">Year</label>
-    <input name="year" type="text" class="form-control" id="year" placeholder="<?php echo ($books['year']); ?>">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+{% extends 'books.html' %}
+
+{% block content %}
+<h1>This will be a form for editing</h1>
+<h2>Title: {{ book[1] }}</h2>
+<h2>Year: {{ book[2] }}</h2>
+<h2>Author: {{ book[3] }}</h2>
+
+<form method="post">
+  <label for="name">Name</label>
+  <input name="name" id="name" value="{{ request.form['name']}}" required>
+
+  <label for="year">Year</label>
+  <input name="year" id="year" value="{{ request.form['year'] }}" required>
+
+  <label for="author">Author</label>
+  <input name="author" id="author" value="{{ request.form['author']}}" required>
+
+  <input type="submit" value="Update Information">
 </form>
+<a href="{{ url_for('books') }}">Back</a>
+{% endblock %}

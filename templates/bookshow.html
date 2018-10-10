@@ -1,0 +1,8 @@
+{% extends 'books.html' %}
+
+{% block content %}
+    <h2>Name: {{ book[1] }}</h2>
+    <h3>Year: {{ book[2] }}</h3>
+    <h3>Author: {{ book[3] }}</h3>
+    <a href="{{ url_for('boooks') }}">Back</a>
+{% endblock %}
